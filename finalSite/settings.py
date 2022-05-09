@@ -27,7 +27,7 @@ DEBUG = True
 
 # ALLOWED_HOSTS = ['your_app_name.herokuapp.com']
 
-ALLOWED_HOSTS = ['indusecommerce.herokuapp.com','127.0.0.1','localhost']
+ALLOWED_HOSTS = ['ecommerceindus.herokuapp.com','127.0.0.1','localhost']
 
 
 # Application definition
