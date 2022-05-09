@@ -37,7 +37,7 @@ class Index(View):
         
         dict_val = {}
         for cus in customer:
-            # print(cus)
+            
             dict_val['address1'] = cus.address1
             dict_val['address2'] = cus.address2
             dict_val['address3'] = cus.address3
