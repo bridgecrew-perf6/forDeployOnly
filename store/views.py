@@ -300,12 +300,12 @@ class SignUp(View):
 
         if(not customer.first_name):
             error_message = "First name required"
-        elif len(customer.first_name) < 4:
-            error_message = "First name should be atleast 4 in length"
+        # elif len(customer.first_name) < 4:
+        #     error_message = "First name should be atleast 4 in length"
         elif not customer.last_name:
             error_message = "Last Name required"
-        elif len(customer.last_name) < 4:
-            error_message = "Last name should be atleast 4 in length"
+        # elif len(customer.last_name) < 4:
+        #     error_message = "Last name should be atleast 4 in length"
         elif not customer.phone:
             error_message = "Phone number is required"
         elif len(customer.phone) < 10:
