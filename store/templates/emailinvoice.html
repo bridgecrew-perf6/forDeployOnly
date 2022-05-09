@@ -1,0 +1,63 @@
+{% extends 'base_without_nav.html' %}
+
+{%block content%}
+{%load cart%}
+
+<div class="row mt-5 mx-auto d-flex justify-content-center ">
+  <div class="col-lg-6 ">
+    <div class="card">
+      <div class="card-body bg-success p-4 bg-opacity-25 text-dark text-center">
+        <h1>Indus Net Website</h1>
+        <h4>Order is successfully placed</h4>
+        <p style="text-align: start;">GSTIN NO. <strong style="color: blue;">37AADCB2230M2ZR</strong></p>
+        <br>
+        <div class="border border-dark p-2 mb-2 text-primary">
+          <h5 class="card-title ">Customer Bill</h5>
+          <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Product Name
+              <span> - </span>
+              <span class="badge text-primary text-wrap text-end">{{product}}</span>
+            </li>
+
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Order Date
+              <span> - </span>
+              <span class="badge text-primary">{{date}}</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              OrderID
+              <span> - </span>
+              <span class="badge text-primary">{{orderId}}</span>
+            </li>
+          </ul>
+
+          <ul class="list-group mt-4">
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Product Price
+              <span> - </span>
+              <span class="badge text-primary">{{total}} INR</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Shipping and packing charges
+              <span> - </span>
+              <span class="badge text-primary">100 INR</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Taxes @12%
+              <span> - </span>
+              <span class="badge text-primary">{{tax}} INR</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              Total price(Inclusive of all tax)
+              <span> - </span>
+              <span class="badge text-primary">{{ultimate_total}} INR</span>
+            </li>
+          </ul>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+  {% endblock %}

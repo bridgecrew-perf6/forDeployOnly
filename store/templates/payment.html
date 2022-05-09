@@ -1,0 +1,181 @@
+{% extends 'base.html' %}
+
+{%block content%}
+{%load cart%}
+
+<div class="row mt-5 mx-auto d-flex justify-content-center">
+  <div class="col-lg-6 ">
+    <div class="card">
+      <div class="card-body" >
+        <h5 class="card-title mb-3">Choose any one payment method</h5>
+        <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="radio_select(1)">
+          <label class="form-check-label" for="flexRadioDefault1">
+            Payment using razorpay
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" onclick="radio_select(2)">
+          <label class="form-check-label" for="flexRadioDefault2">
+            Pay on delivery
+          </label>
+        </div>
+
+        <!-- end of radio logic -->
+      </div>
+
+    </div>
+    <div class="border mt-3 p-2">
+      <h5>Your chosen address is</h5>
+      <p class="shadow p-3 bg-body rounded">{{address_name}}</p>
+      <p class="text-primary">* This address is approximate view of the area</p>
+      
+      <!-- <span class="text-primary">* This address is approximate view of the area</span> -->
+      <div>
+        <iframe
+        width="630"
+        height="450"
+        style="border:0"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src='{{address}}'>
+        </iframe>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body" >
+        <h5 class="card-title ">Customer Bill</h5>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center ">
+            Product Name
+            <span class="badge text-primary text-wrap text-end">{{product}}</span>
+          </li>
+
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Order Date
+            <span class="badge text-primary">{{date}}</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            OrderID
+            <span class="badge text-primary">{{orderId}}</span>
+          </li>
+        </ul>
+
+        <ul class="list-group mt-4">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Gross Total
+            <span class="badge text-primary">{{total}} INR</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Shipping and packing charges
+            <span class="badge text-primary">100 INR</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Taxes @12%
+            <span class="badge text-primary">{{tax}} INR</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            Amount to be paid(Inclusive of taxes)
+            <span class="badge text-primary">{{toPay}} INR</span>
+          </li>
+        </ul>
+
+        <input type="button" class="btn btn-secondary mt-3 float-end px-3" id="pay_select" value="Place Order" onclick="pay_select()">
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- modal -->
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header bg-success text-white text-center">
+        <h2 class="modal-title " id="exampleModalLabel">Congratulations</h2>
+
+
+        <hr>
+        <form action="" method="POST">
+          {%csrf_token%}
+          
+          <input hidden type="text" class="btn btn-info mb-2 mt-0 ml-0" name="gohome" value="Be ready with the change" id="">
+          <br>
+          <input type="submit" value="" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+        </form>
+        
+      </div>
+      <h5 class="text-success text-center mt-3">Your Order was placed</h5>
+      <div class="modal-body text-center text-info">
+        <div class="m-2 p-3">
+
+          <h5>Total Amount to be paid on delivery {{toPay}}INR</h5>
+          <p class="text-warning">Be ready with the change</p>
+        </div>
+      </div>
+      <form action="" class="mx-auto mb-2" method="POST">
+        {%csrf_token%}
+        <input hidden type="text" class="btn btn-info mb-2 mt-0 ml-0" name="gohome" value="Be ready with the change" id="">
+        <br>
+        <input type="submit" class="btn btn-info ml-4"  value="Go to homepage">
+      </form>
+      
+    </div>
+  </div>
+</div>
+
+<script>
+  document.getElementById("input_tag").defaultValue = None
+  // var pay = document.getElementById('pay_select')
+  var glob_var = 0
+  function radio_select(x){
+    if(x == 1){
+      glob_var = 1
+      document.getElementById('pay_select').style.background = '#81d4fa'
+      document.getElementById('pay_select').style.color = 'black'
+      document.getElementById('pay_select').style.float = "right"
+      document.getElementById('pay_select').style.paddingLeft = "8%"
+      document.getElementById('pay_select').style.paddingRight = "8%"
+      document.getElementById('pay_select').style.border = "None"
+      // document.getElementById('pay_select').style.fontSize = "1.5rem"
+
+
+    }
+    if(x == 2){
+      glob_var = 2
+      document.getElementById('pay_select').style.background = '#81d4fa'
+      document.getElementById('pay_select').style.color = 'black'
+      document.getElementById('pay_select').style.float = "right"
+      document.getElementById('pay_select').style.paddingLeft = "8%"
+      document.getElementById('pay_select').style.paddingRight = "8%"
+      document.getElementById('pay_select').style.border = "None"
+      // document.getElementById('pay_select').style.fontSize = "1.5rem"
+
+    }
+  }
+
+
+  function pay_select(){
+    localStorage.setItem("pay_option", glob_var);
+    if(glob_var != 1 && glob_var != 2) {
+      document.getElementById('pay_select').style.display = "block"
+      alert('select payment method first')
+    }
+    else if(glob_var === 1){
+      window.location.href = "http://127.0.0.1:8000/razorInte/";
+    }
+    else if (glob_var === 2){
+      window.location.href = "http://127.0.0.1:8000/success/";
+    }
+
+  }
+</script>
+
+{%endblock%}
