@@ -19,7 +19,7 @@ class Mailing:
             [email]
         )
         email.content_subtype = 'html'
-        email.send()
+        # email.send()
         print('went')
         return None
 
